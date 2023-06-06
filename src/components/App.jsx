@@ -1,5 +1,4 @@
 export const App = () => {
-  console.log('goit-react-hw-04-images');
   return (
     <div
       style={{
