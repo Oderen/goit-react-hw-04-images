@@ -9,6 +9,7 @@ import css from '../styles.module.css';
 
 import Notiflix from 'notiflix';
 
+// Shorter version
 // const useCustomState = initialValue => {
 //   const [state, setState] = useState(initialValue);
 
