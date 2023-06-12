@@ -57,17 +57,9 @@ export function App() {
   //   isButtonVisible,
   // } = state;
 
-  useEffect(() => {
-    if (searchQuery === '') {
-      setStatus('idle');
-      setIsButtonVisible(false);
-      return;
-    }
-
+  const fetchData = () => {
     const baseURL = 'https://pixabay.com/api';
     const KEY = '36858767-c9bdee91508ce121a2eb6b95d';
-
-    setStatus('pending');
 
     fetch(
       `${baseURL}/?q=${searchQuery}&page=${page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`
@@ -106,7 +98,19 @@ export function App() {
         console.log(error.message);
         setIsButtonVisible(false);
       });
-  }, [searchQuery, page, images, pictureCount]);
+  };
+
+  useEffect(() => {
+    if (searchQuery === '') {
+      setIsButtonVisible(false);
+      setStatus('idle');
+      return;
+    }
+
+    fetchData();
+
+    setStatus('pending');
+  }, [searchQuery, page]);
 
   const handleFormSubmit = newSearchQuery => {
     if (newSearchQuery === searchQuery) {
