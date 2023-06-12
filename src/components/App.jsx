@@ -62,7 +62,7 @@ export function App() {
       const baseURL = 'https://pixabay.com/api';
       const KEY = '36858767-c9bdee91508ce121a2eb6b95d';
 
-      const response = fetch(
+      const response = await fetch(
         `${baseURL}/?q=${searchQuery}&page=${page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`
       );
       if (response.ok) {
