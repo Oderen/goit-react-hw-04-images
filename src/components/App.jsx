@@ -65,7 +65,7 @@ export function App() {
       const response = await fetch(
         `${baseURL}/?q=${searchQuery}&page=${page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`
       );
-      if (response.ok) {
+      if (!response.ok) {
         return new Error('Something went wrong');
       }
 
