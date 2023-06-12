@@ -57,46 +57,47 @@ export function App() {
   //   isButtonVisible,
   // } = state;
 
-  // const fetchData = async () => {
-  //   try {
-  //     const baseURL = 'https://pixabay.com/api';
-  //     const KEY = '36858767-c9bdee91508ce121a2eb6b95d';
+  const fetchData = async () => {
+    try {
+      const baseURL = 'https://pixabay.com/api';
+      const KEY = '36858767-c9bdee91508ce121a2eb6b95d';
 
-  //     const response = fetch(
-  //       `${baseURL}/?q=${searchQuery}&page=${page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`
-  //     );
-  //     if (response.ok) {
-  //       return new Error('Something went wrong');
-  //     }
+      const response = fetch(
+        `${baseURL}/?q=${searchQuery}&page=${page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`
+      );
+      if (response.ok) {
+        return new Error('Something went wrong');
+      }
 
-  //     const data = await response.json();
-  //     const { hits, total, totalHits } = data;
+      const data = await response.json();
+      const { hits, total, totalHits } = data;
 
-  //     setImages([...images, ...hits]);
-  //     setPictureCount(pictureCount + hits.length);
-  //     setStatus('resolved');
+      setImages([...images, ...hits]);
+      setPictureCount(pictureCount + hits.length);
+      setStatus('resolved');
 
-  //     if (total === 0) {
-  //       Notiflix.Notify.info('Sorry, there is no image found');
-  //       return setStatus('rejected');
-  //     }
+      if (total === 0) {
+        Notiflix.Notify.info('Sorry, there is no image found');
+        return setStatus('rejected');
+      }
 
-  //     if (totalHits > pictureCount) {
-  //       setIsButtonVisible(true);
-  //     }
+      if (totalHits > pictureCount) {
+        setIsButtonVisible(true);
+      }
 
-  //     if (totalHits < pictureCount) {
-  //       setIsButtonVisible(false);
-  //       return Notiflix.Notify.info(
-  //         "Wow, look's like these are are all images"
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     setIsButtonVisible(false);
-  //   }
-  // };
+      if (totalHits < pictureCount) {
+        setIsButtonVisible(false);
+        return Notiflix.Notify.info(
+          "Wow, look's like these are are all images"
+        );
+      }
+    } catch (error) {
+      console.log(error);
+      setIsButtonVisible(false);
+    }
+  };
 
+  /* eslint-disable */
   useEffect(() => {
     if (searchQuery === '') {
       setIsButtonVisible(false);
@@ -104,53 +105,54 @@ export function App() {
       return;
     }
 
-    (function fetchData() {
-      const baseURL = 'https://pixabay.com/api';
-      const KEY = '36858767-c9bdee91508ce121a2eb6b95d';
+    // (function fetchData() {
+    //   const baseURL = 'https://pixabay.com/api';
+    //   const KEY = '36858767-c9bdee91508ce121a2eb6b95d';
 
-      fetch(
-        `${baseURL}/?q=${searchQuery}&page=${page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`
-      )
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          }
+    //   fetch(
+    //     `${baseURL}/?q=${searchQuery}&page=${page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`
+    //   )
+    //     .then(response => {
+    //       if (response.ok) {
+    //         return response.json();
+    //       }
 
-          return Promise.reject(new Error('Opps, something went wrong'));
-        })
-        .then(data => {
-          const { hits, total, totalHits } = data;
+    //       return Promise.reject(new Error('Opps, something went wrong'));
+    //     })
+    //     .then(data => {
+    //       const { hits, total, totalHits } = data;
 
-          setImages([...images, ...hits]);
-          setPictureCount(pictureCount + hits.length);
-          setStatus('resolved');
+    //       setImages([...images, ...hits]);
+    //       setPictureCount(pictureCount + hits.length);
+    //       setStatus('resolved');
 
-          if (total === 0) {
-            Notiflix.Notify.info('Sorry, there is no image found');
-            return setStatus('rejected');
-          }
+    //       if (total === 0) {
+    //         Notiflix.Notify.info('Sorry, there is no image found');
+    //         return setStatus('rejected');
+    //       }
 
-          if (totalHits > pictureCount) {
-            setIsButtonVisible(true);
-          }
+    //       if (totalHits > pictureCount) {
+    //         setIsButtonVisible(true);
+    //       }
 
-          if (totalHits < pictureCount) {
-            setIsButtonVisible(false);
-            return Notiflix.Notify.info(
-              "Wow, look's like these are are all images"
-            );
-          }
-        })
-        .catch(error => {
-          console.log(error.message);
-          setIsButtonVisible(false);
-        });
-    })();
+    //       if (totalHits < pictureCount) {
+    //         setIsButtonVisible(false);
+    //         return Notiflix.Notify.info(
+    //           "Wow, look's like these are are all images"
+    //         );
+    //       }
+    //     })
+    //     .catch(error => {
+    //       console.log(error.message);
+    //       setIsButtonVisible(false);
+    //     });
+    // })();
 
     fetchData();
 
     setStatus('pending');
   }, [searchQuery, page]);
+  /* eslint-enable */
 
   const handleFormSubmit = newSearchQuery => {
     if (newSearchQuery === searchQuery) {
