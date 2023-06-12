@@ -33,6 +33,8 @@ export function App() {
   const [showModal, setShowModal] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(false);
 
+  // const isFirstRender = useRef(true);
+
   // const [state, setState] = useCustomState({
   //   searchQuery: '',
   //   page: 1,
@@ -104,7 +106,7 @@ export function App() {
         console.log(error.message);
         setIsButtonVisible(false);
       });
-  }, [searchQuery, page]);
+  }, [searchQuery, page, images, pictureCount]);
 
   const handleFormSubmit = newSearchQuery => {
     if (newSearchQuery === searchQuery) {
